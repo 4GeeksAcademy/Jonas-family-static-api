@@ -37,6 +37,23 @@ def handle_hello():
                      "family": members}
     return jsonify(response_body), 200
 
+@app.route('/members', methods=['POST'])
+def add_family_member():           
+    data = request.get_json()
+
+    jackson_family.add_member(data)
+
+    return jsonify(data), 200
+
+@app.route('/members/<int:member_id>', methods=['GET'])
+def get_single_member(member_id):
+    print(f"ID recibido: {member_id}")    
+    member = jackson_family.get_member(member_id)
+    if member:
+        print(f"Miembro encontrado: {member}") 
+        return jsonify(member), 200
+    else:
+        return jsonify({"error": "Member not found"}), 404
 
 
 # This only runs if `$ python src/app.py` is executed
