@@ -45,6 +45,15 @@ def add_family_member():
 
     return jsonify(data), 200
 
+@app.route('/members/<int:member_id>', methods=['DELETE'])
+def delete_family_member(member_id):
+    result = jackson_family.delete_member(member_id)
+
+    if result:
+        return jsonify({"done": True}), 200
+    else:
+        return jsonify({"error": "Member not found"}, 404)
+
 @app.route('/members/<int:member_id>', methods=['GET'])
 def get_single_member(member_id):
     print(f"ID recibido: {member_id}")    

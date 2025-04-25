@@ -34,11 +34,6 @@ class FamilyStructure:
         print(f"Miembros actuales: {self._members}")
 
 
-    def delete_member(self, id):
-        ## You have to implement this method
-        ## Loop the list and delete the member with the given id
-        pass
-
     def get_member(self, id):
         print(f"Miembros disponibles: {self._members}")
         for member in self._members:
@@ -46,6 +41,13 @@ class FamilyStructure:
                 print(f"Comprobando miembro: {member['id']}")
                 return member
         return None
+    
+    def delete_member(self, id):
+        for index, member in enumerate(self._members):
+            if member["id"] == id:
+                self._members.pop(index)
+                return True
+        return False
 
     # This method is done, it returns a list with all the family members
     def get_all_members(self):
